@@ -49,9 +49,9 @@ namespace Biografen.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAdministrator(int id, CinemaHall cinema
+        public async Task<IActionResult> PutAdministrator(int id, CinemaHall cinema)
         {
-            if (id != cinema.cinemahallId
+            if (id != cinema.cinemahallId)
             {
                 return BadRequest();
             }

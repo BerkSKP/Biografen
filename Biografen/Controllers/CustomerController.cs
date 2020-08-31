@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Biografen.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Biografen.Controllers
 {
@@ -13,43 +15,43 @@ namespace Biografen.Controllers
     {
         private readonly DatabaseContext _context;
 
-        public CustomerController(Customer context)
+        public CustomerController(DatabaseContext context)
         {
             _context = context;
         }
 
-        // GET: api/guests
+        // GET: api/customer
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Guest>>> GetCustomerController()
+        public async Task<ActionResult<IEnumerable<Customer>>> GetCustomers()
         {
-            return await _context.guests.ToListAsync();
+            return await _context.customers.ToListAsync();
         }
 
-        // GET: api/guests/5
+        // GET: api/customer/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Guest>> GetGuest(int id)
+        public async Task<ActionResult<Customer>> GetCustomer(int id)
         {
-            var guest = await _context.guests.FindAsync(id);
+            var customer = await _context.customers.FindAsync(id);
 
-            if (guest == null)
+            if (customer == null)
             {
                 return NotFound();
             }
 
-            return guest;
+            return customer;
         }
-        // PUT: api/guests/5
+        // PUT: api/customer/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutGuest(int id, Guest guest)
+        public async Task<IActionResult> PutCustomer(int id, Customer customer)
         {
-            if (id != guest.guestId)
+            if (id != customer.customerId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(guest).State = EntityState.Modified;
+            _context.Entry(customer).State = EntityState.Modified;
 
             try
             {
@@ -57,7 +59,7 @@ namespace Biografen.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!GuestExists(id))
+                if (!CustomerExists(id))
                 {
                     return NotFound();
                 }
@@ -71,39 +73,39 @@ namespace Biografen.Controllers
         }
 
 
-        // POST: api/guests
+        // POST: api/Customer
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Guest>> PostGuest(Guest guest)
+        public async Task<ActionResult<Guest>> PostCustomer(Customer customer)
         {
-            _context.guests.Add(guest);
+            _context.customers.Add(customer);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetGuest", new { id = guest.guestId }, guest);
+            return CreatedAtAction("GetCustomer", new { id = customer.customerId }, customer);
         }
 
-        // DELETE: api/guests/5
+        // DELETE: api/Customer/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Guest>> DeleteGuest(int id)
+        public async Task<ActionResult<Customer>> DeleteCustomer(int id)
         {
-            var guest = await _context.guests.FindAsync(id);
-            if (guest == null)
+            var Customer = await _context.customers.FindAsync(id);
+            if (Customer == null)
             {
                 return NotFound();
             }
 
-            _context.guests.Remove(guest);
+            _context.customers.Remove(Customer);
             await _context.SaveChangesAsync();
 
-            return guest;
+            return Customer;
         }
-        private bool GuestExists(int id)
+        private bool CustomerExists(int id)
         {
-            return _context.guests.Any(e => e.guestId == id)
+            return _context.customers.Any(e => e.customerId == id);
         }
 
     }
 }
-    }
-}
+
+

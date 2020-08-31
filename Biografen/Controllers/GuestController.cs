@@ -102,7 +102,7 @@ namespace Biografen.Controllers
         }
         private bool GuestExists(int id)
         {
-            return _context.guests.Any(e => e.guestId == id)
+            return _context.guests.Any(e => e.guestId == id);
         }
 
     }

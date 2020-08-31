@@ -11,27 +11,27 @@ namespace Biografen.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AdministratorController : ControllerBase
+    public class ShowController : ControllerBase
     {
         private readonly DatabaseContext _context;
 
-        public AdministratorController(DatabaseContext context)
+        public ShowController(DatabaseContext context)
         {
             _context = context;
         }
 
         // GET: api/administrator
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Administrator>>> GetAdministrators()
+        public async Task<ActionResult<IEnumerable<Show>>> GetShow()
         {
-            return await _context.administrators.ToListAsync();
+            return await _context.shows.ToListAsync();
         }
 
         // GET: api/administrator/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Administrator>> GetAdministrator(int id)
+        public async Task<ActionResult<Show>> GetShow(int id)
         {
-            var admin = await _context.administrators.FindAsync(id);
+            var admin = await _context.shows.FindAsync(id);
 
             if (admin == null)
             {
@@ -45,7 +45,7 @@ namespace Biografen.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAdministrator(int id, Administrator administrator)
+        public async Task<IActionResult> PutShow(int id, Show show)
         {
             if (id != administrator.administratorId)
             {
@@ -60,7 +60,7 @@ namespace Biografen.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AdministratorExists(id))
+                if (!ShowExists(id))
                 {
                     return NotFound();
                 }
@@ -77,33 +77,33 @@ namespace Biografen.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Administrator>> PostAdministrator(Administrator administrator)
+        public async Task<ActionResult<Show>> PostAdministrator(Show show)
         {
-            _context.administrators.Add(administrator);
+            _context.shows.Add(show);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetAdministrator", new { id = administrator.administratorId }, administrator);
+            return CreatedAtAction("GetShow", new { id = show.showId }, show);
         }
 
         // DELETE: api/administrator/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Administrator>> DeleteAdministrator(int id)
+        public async Task<ActionResult<Show>> DeleteShow(int id)
         {
-            var administrator = await _context.administrators.FindAsync(id);
-            if (administrator == null)
+            var show = await _context.shows.FindAsync(id);
+            if (show == null)
             {
                 return NotFound();
             }
 
-            _context.administrators.Remove(administrator);
+            _context.shows.Remove(show);
             await _context.SaveChangesAsync();
 
-            return administrator;
+            return show;
         }
 
-        private bool AdministratorExists(int id)
+        private bool ShowExists(int id)
         {
-            return _context.administrators.Any(e => e.administratorId == id);
+            return _context.shows.Any(e => e.showId == id);
         }
     }
 }
