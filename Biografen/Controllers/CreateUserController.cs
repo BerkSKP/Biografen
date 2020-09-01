@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Threading.Tasks;
+//using Microsoft.AspNetCore.Http;
+//using Microsoft.AspNetCore.Mvc;
 
-namespace Biografen.Controllers
-{
-    [Route("api/[controller]")]
-    [ApiController]
-    public class CreateUserController : ControllerBase
-    {
-    }
-}
+//namespace Biografen.Controllers
+//{
+//    [Route("api/[controller]")]
+//    [ApiController]
+//    public class CreateUserController : ControllerBase
+//    {
+//    }
+//}

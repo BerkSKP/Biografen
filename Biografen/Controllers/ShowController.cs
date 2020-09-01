@@ -20,14 +20,14 @@ namespace Biografen.Controllers
             _context = context;
         }
 
-        // GET: api/administrator
+        // GET: api/show
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Show>>> GetShow()
         {
             return await _context.shows.ToListAsync();
         }
 
-        // GET: api/administrator/5
+        // GET: api/show/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Show>> GetShow(int id)
         {
@@ -41,18 +41,18 @@ namespace Biografen.Controllers
             return admin;
         }
 
-        // PUT: api/administrator/5
+        // PUT: api/show/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
         public async Task<IActionResult> PutShow(int id, Show show)
         {
-            if (id != administrator.administratorId)
+            if (id != show.showId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(administrator).State = EntityState.Modified;
+            _context.Entry(show).State = EntityState.Modified;
 
             try
             {
@@ -73,11 +73,11 @@ namespace Biografen.Controllers
             return NoContent();
         }
 
-        // POST: api/administrator
+        // POST: api/show
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Show>> PostAdministrator(Show show)
+        public async Task<ActionResult<Show>> PostShow(Show show)
         {
             _context.shows.Add(show);
             await _context.SaveChangesAsync();
@@ -85,7 +85,7 @@ namespace Biografen.Controllers
             return CreatedAtAction("GetShow", new { id = show.showId }, show);
         }
 
-        // DELETE: api/administrator/5
+        // DELETE: api/show/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Show>> DeleteShow(int id)
         {
