@@ -101,7 +101,6 @@ namespace Biografen.Controllers
 
             return movie;
         }
-
         private bool MovieExists(int id)
         {
             return _context.movies.Any(e => e.movieID == id);
